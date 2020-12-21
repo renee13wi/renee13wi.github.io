@@ -1,1 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Renee Tech Blog]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://gatsby-starter-blog-demo.netlify.app</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 21 Dec 2020 06:55:37 GMT</lastBuildDate><item><title><![CDATA[Execution Context]]></title><description><![CDATA[test]]></description><link>https://gatsby-starter-blog-demo.netlify.app/201221/</link><guid isPermaLink="false">https://gatsby-starter-blog-demo.netlify.app/201221/</guid><content:encoded>&lt;p&gt;test&lt;/p&gt;</content:encoded></item></channel></rss>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Renee Tech Blog]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://gatsby-starter-blog-demo.netlify.app</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 21 Dec 2020 08:36:03 GMT</lastBuildDate><item><title><![CDATA[Execution Context?]]></title><description><![CDATA[ECMAScript에서는 실행 컨텍스트를 실행 가능한 코드를 형상화하고 구분하는 추상적인 개념으로 기술한다. 쉽게 말하자면 코드들이 실행되기 위한 환경이라고 할 수 있고, 이 컨텍스트 안에 실행에 필요한 여러가지 정보를 담고 있다. ECMAScript…]]></description><link>https://gatsby-starter-blog-demo.netlify.app/201221/</link><guid isPermaLink="false">https://gatsby-starter-blog-demo.netlify.app/201221/</guid><pubDate>Mon, 21 Dec 2020 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;ECMAScript에서는 실행 컨텍스트를 &lt;strong&gt;실행 가능한 코드를 형상화하고 구분하는 추상적인 개념&lt;/strong&gt;으로 기술한다.&lt;/p&gt;
+&lt;p&gt;쉽게 말하자면 &lt;strong&gt;코드들이 실행되기 위한 환경&lt;/strong&gt;이라고 할 수 있고, 이 컨텍스트 안에 &lt;strong&gt;실행에 필요한 여러가지 정보&lt;/strong&gt;를 담고 있다.&lt;/p&gt;
+&lt;p&gt;ECMAScript에서는 실행 컨텍스트가 형성되는 경우를 세가지로 규정하고 있는데,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;전역코드&lt;/li&gt;
+&lt;li&gt;eval()함수로 실행되는 코드&lt;/li&gt;
+&lt;li&gt;함수 안의 코드&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;대부분의 프로그래머는 함수로 실행 컨텍스트를 만든다.&lt;/p&gt;
+&lt;p&gt;그리고 이 코드 블록 안에 변수 및 객체, 실행 가능한 코드가 들어있다.
+이 코드가 실행되면 실행 컨텍스트가 생성되고, 실행 컨텍스트는 스택 안에 하나씩 차곡차곡 쌓이고,
+제일 위에 위치하는 실행 컨텍스트가 현재 실행되고 있는 컨텍스트다.
+ECMAScript에서는 실행 컨텍스트의 생성을 다음처럼 설명한다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;현재 실행되는 컨텍스트에서 이 컨텍스트와 관련 없는 실행 코드가 실행되면, 새로운 컨텍스트가 생성되어 스택에 들어가고 제어권이 그 컨텍스트로 이동한다.&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;console.log&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;This is global context&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function-name function&quot;&gt;ExContext1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+	console.log&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;This is ExContext1&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function-name function&quot;&gt;ExContext2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+	ExContext1&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+	console.log&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;This is ExContext2&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+ExContext2&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;[출력 결과]&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;This is global context
+This is ExContext1
+This is ExContext2&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item></channel></rss>
