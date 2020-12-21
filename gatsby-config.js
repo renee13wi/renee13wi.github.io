@@ -1,16 +1,13 @@
 module.exports = {
   pathPrefix: "/renee_blog",
   siteMetadata: {
-    title: `Gatsby Starter Blog`,
+    title: `Renee Tech Blog`,
     author: {
-      name: `Kyle Mathews`,
-      summary: `who lives and works in San Francisco building useful things.`,
+      name: `renee`,
+      summary: `daily develop`,
     },
     description: `A starter blog demonstrating what Gatsby can do.`,
     siteUrl: `https://gatsby-starter-blog-demo.netlify.app/`,
-    social: {
-      twitter: `kylemathews`,
-    },
   },
   plugins: [
     {
