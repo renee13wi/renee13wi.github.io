@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{"3XHS":function(e,t,n){"use strict";n.r(t),n.d(t,"default",(function(){return c}));var r=n("q1tI"),a=n.n(r);function u(e){return a.a.createElement("h1",null,e.headerText)}function c(){return a.a.createElement("div",null,a.a.createElement(u,{headerText:"About Gatsby"}),a.a.createElement("h1",{style:{color:"red"}},"About Gatsby"))}}}]);
+//# sourceMappingURL=component---src-pages-about-js-3b9b357598aa307c9b62.js.map
