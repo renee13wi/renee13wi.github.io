@@ -41,10 +41,10 @@
   --fontWeight-bold: 700;
   --fontWeight-extrabold: 800;
   --fontWeight-black: 900;
-  --fontSize-root: 16px;
+  --fontSize-root: 15px;
   --lineHeight-none: 1;
   --lineHeight-tight: 1.1;
-  --lineHeight-normal: 1.5;
+  --lineHeight-normal: 1.85;
   --lineHeight-relaxed: 1.625;
   /* 1.200 Minor Third Type Scale */
   --fontSize-0: 0.833rem;
@@ -85,7 +85,7 @@ body {
 }
 
 footer {
-  padding: var(--spacing-6) var(--spacing-0);
+padding: var(--spacing-6) var(--spacing-0);
 }
 
 hr {
@@ -281,6 +281,10 @@ a:focus {
   margin-bottom: var(--spacing-4);
 }
 
+.post-list-item small {
+  font-family: var(--fontFamily-noto);
+}
+
 .header-link-home {
   font-weight: var(--fontWeight-bold);
   font-family: var(--font-heading);
@@ -294,7 +298,9 @@ a:focus {
 }
 
 .bio p {
+  padding-top: var(--spacing-3);
   margin-bottom: var(--spacing-0);
+  font-family: var(--fontFamily-noto);
 }
 
 .bio-avatar {
