@@ -4,7 +4,7 @@ module.exports = {
     title: `Renee Tech Blog`,
     author: {
       name: `renee`,
-      summary: `daily develop`,
+      summary: `daily studying UI`,
     },
     description: `A starter blog demonstrating what Gatsby can do.`,
     siteUrl: `https://gatsby-starter-blog-demo.netlify.app/`,
