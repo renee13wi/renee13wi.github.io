@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Renee Tech Blog]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://gatsby-starter-blog-demo.netlify.app</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 21 Dec 2020 08:36:03 GMT</lastBuildDate><item><title><![CDATA[Execution Context?]]></title><description><![CDATA[ECMAScript에서는 실행 컨텍스트를 실행 가능한 코드를 형상화하고 구분하는 추상적인 개념으로 기술한다. 쉽게 말하자면 코드들이 실행되기 위한 환경이라고 할 수 있고, 이 컨텍스트 안에 실행에 필요한 여러가지 정보를 담고 있다. ECMAScript…]]></description><link>https://gatsby-starter-blog-demo.netlify.app/201221/</link><guid isPermaLink="false">https://gatsby-starter-blog-demo.netlify.app/201221/</guid><pubDate>Mon, 21 Dec 2020 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;ECMAScript에서는 실행 컨텍스트를 &lt;strong&gt;실행 가능한 코드를 형상화하고 구분하는 추상적인 개념&lt;/strong&gt;으로 기술한다.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Renee Tech Blog]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://gatsby-starter-blog-demo.netlify.app</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 22 Dec 2020 00:35:22 GMT</lastBuildDate><item><title><![CDATA[Execution Context?]]></title><description><![CDATA[ECMAScript에서는 실행 컨텍스트를 실행 가능한 코드를 형상화하고 구분하는 추상적인 개념으로 기술한다. 쉽게 말하자면 코드들이 실행되기 위한 환경이라고 할 수 있고, 이 컨텍스트 안에 실행에 필요한 여러가지 정보를 담고 있다. ECMAScript…]]></description><link>https://gatsby-starter-blog-demo.netlify.app/context/</link><guid isPermaLink="false">https://gatsby-starter-blog-demo.netlify.app/context/</guid><pubDate>Mon, 21 Dec 2020 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;ECMAScript에서는 실행 컨텍스트를 &lt;strong&gt;실행 가능한 코드를 형상화하고 구분하는 추상적인 개념&lt;/strong&gt;으로 기술한다.&lt;/p&gt;
 &lt;p&gt;쉽게 말하자면 &lt;strong&gt;코드들이 실행되기 위한 환경&lt;/strong&gt;이라고 할 수 있고, 이 컨텍스트 안에 &lt;strong&gt;실행에 필요한 여러가지 정보&lt;/strong&gt;를 담고 있다.&lt;/p&gt;
 &lt;p&gt;ECMAScript에서는 실행 컨텍스트가 형성되는 경우를 세가지로 규정하고 있는데,&lt;/p&gt;
 &lt;ul&gt;
@@ -27,4 +27,8 @@ ExContext2&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span
 &lt;p&gt;[출력 결과]&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;This is global context
 This is ExContext1
-This is ExContext2&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item></channel></rss>
+This is ExContext2&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;전역 실행 컨텍스트가 가장 먼저 실행된다.
+전역 실행 컨텍스트라는 말은 가장 먼저 실행되는 실행 컨텍스트일 뿐이다.
+이 과정에서 새로운 함수 호출이 발생하면 새로운 컨텍스트가 만들어지고 실행되며, 종료되면 반환한다.
+이와 같은 과정이 반복된 후, 전역 실행 컨텍스트의 실행이 완료되면 모든 실행이 끝난다.&lt;/p&gt;</content:encoded></item></channel></rss>
