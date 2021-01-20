@@ -18,7 +18,10 @@ ECMAScript 2015는 ECMAScript 언어의 6번째 표준 스펙(Spec)입니다.
 ES5까지 변수를 선언할 수 있는 유일한 방법은 var 키워드를 사용하는 것이였다.  
 ES6에서는 블록 유효 범위를 갖는 새로운 변수 선언 방법을 지원한다.  
 바로 let, const이다.  
-let은 var와 유사하게 동작하고, const는 재할당 및 재선언이 불가능하다.
+let은 var와 유사하게 동작하고, const는 재할당 및 재선언이 불가능하다.  
+
+[MDN Let](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/let)  
+[MDN Const](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/const)  
 
 ```jsx
 var name = "lalalal";
@@ -68,6 +71,8 @@ myName = "renee";
 scope는 기본적으로 버블이다.  
 이 버블이 variable에 접근 가능한지 아닌지를 감지해준다.
 
+[MDN block](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/block)  
+
 ```jsx
 if(true) {
 	const hello = "hi";
@@ -105,7 +110,9 @@ var는 그만 사용하는게 좋다. 많은 사람들이 root에서 var를 교�
 
 ## Functions
 ### Arrow Function
-Arrow Function은 자바스크립트에서 함수의 모습을 개선한 것으로서 좀 더 보기 좋게 만든 것을 의미한다. 
+Arrow Function은 자바스크립트에서 함수의 모습을 개선한 것으로서 좀 더 보기 좋게 만든 것을 의미한다.  
+
+[MDN Arrow Function](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Functions/%EC%95%A0%EB%A1%9C%EC%9A%B0_%ED%8E%91%EC%85%98)  
 
 #### 화살표 함수 선언 방법
 ```jsx
@@ -349,6 +356,8 @@ console.log(sayHi());
 ES6에서는 템플릿 리터럴(Template literal)이라고 불리는 새로운 문자열 표기법을 도입하였다.  
 템플릿 리터럴은 일반 문자열과 비슷해 보이지만, ', " 같은 통상적인 따옴표 문자 대신 백틱(backtick) 문자 `를 사용한다.
 
+[MDN Template literals](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Template_literals)  
+
 ``` js
 // ES5
 const sayHi = (aName = "anon") => "hello" + aName + "test";
@@ -366,7 +375,9 @@ console.log(`hello how are you ${add(6, 6)}`);
 문자열 인터폴레이션 ${...}으로 표현합니다.
 
 ### Fragment HTML
-Javascript 안에서 html을 쓸 수 있다는 점이다.
+Javascript 안에서 html을 쓸 수 있다는 점이다.  
+
+[MDN DocumentFragment](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment)  
 
 ``` js
 const wrapper = document.querySelector(".wrapper");
@@ -532,21 +543,466 @@ check(); // 4
 
 ### Object destructuring (객체 디스트럭처링)
 
+[MDN 객체 구조 분해](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#%EA%B0%9D%EC%B2%B4_%EA%B5%AC%EC%A1%B0_%EB%B6%84%ED%95%B4)  
 
+``` javascript
+const settings = {
+	notifications: {
+		follow: true,
+		alerts: true,
+		unfollow:false
+	},
+	color: {
+		theme: "dark"
+	}
+}
+
+// 이전 방식
+if(settings.notifications.follow) {
+
+}
+
+// Destructuring 구조
+const {
+	notifications: {follow},
+	color
+} = settings;
+
+console.log(follow) // true
+
+const {follow} = settings;
+// 이렇게는 follow에 도달할 수 없다. 
+// 먼저 notifications로 접근하고 notifications 안에 있는 follow로 접근 할 수 있다.
+
+const {
+	notifications: {
+		follow
+	}
+} = settings;
+// const notifications = settings.notifications 와 같은 것
+```
 ### Function Destructuring (함수 디스트럭처링)
 
+``` javascript
+/*
+ user 세팅을 저장하는 함수라고 하고 이름을 saveSetting
+*/
+
+function saveSettings(followAlert, unfollowAlert, mrkAler, themeColor) {
+	console.log(color);
+}
+
+function saveSettings({ follow, alert, color="greens" }) {
+	console.log(color);
+}
+
+function saveSettings({ notifications, color: { theme } }) {
+	console.log(color);
+}
+
+saveSettings({
+	notifications: {
+		follow: true,
+		alert: true,
+		mkt: false
+	},
+	color: {
+		theme: "blue"
+	}
+});
+```
 
 ### Array Destructuring (배열 디스트럭처링)
+
+[MDN 배열 구조 분해](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#%EB%B0%B0%EC%97%B4_%EA%B5%AC%EC%A1%B0_%EB%B6%84%ED%95%B4)  
+
+``` javascript
+const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+// const mon = days[0];
+// const tue = days[1];
+// const wed = days[2];
+const [mon, tue, wed] = days;
+//const [mon, tue, wed, thu = "Thu"] = days;
+```
+
+---
+
+## For of Loop
+
+``` javascript
+/*
+  루프는 기본적으로 같은 일을 반복하는 것 
+*/
+const friends = ["Nico", "Lynn", "ha", "hu"]
+
+for ( let i = 0; i < friends.length; i++ ) {
+	console.log(`${i} I love kimchi`);
+	console.log(friends[i]);
+}
+```
+``` javascript
+// forEach는 배열에 있는 각각의 엘리먼트에 대해 특정한 액션을 실행
+// forEach는 current item 말고 index를 붙여서 함수를 호출 할 수 있다
+// 첫번재 인자 : current item
+// 두번째 인자 : index
+// 세번째 인자 : current array
+const friends = ["Nico", "Lynn", "ha", "hu"]
+const addHeart = (c, i, a) => console.log(c, i, a);
+friends.forEach(addHeart);
+```
+``` javascript
+// forEach와는 다르다
+// const로 선언 할 지, let으로 선언 할 지 선택할 수 있다
+// forEach에서는 안됨
+const friends = ["Nico", "Lynn", "ha", "hu"]
+
+for (const friend of friends) {
+	console.log(friend);
+}
+```
+``` javascript
+// for of loop 는 중도에 멈출 수도 있다 
+const friends = ["Nico", "Lynn", "Japan Guy", "Autumn", "Dal", "Mark", "Pipe", "Theo"];
+
+// Dal을 찾는 순간 멈추고 싶을 때
+for(const friend of friends) {
+	if(friend == "Dal") {
+		break;
+	} else {
+		console.log(friend);
+	}
+}
+```
+
+---
+## Classes
+[MDN Classes](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Classes)  
+
+### Class?
+자바스크립트는 프로토타입 기반 객체지향 언어입니다. 다른 객체지향 언어들과 차이는 있지만, 강력한 객체지향 프로그래밍 능력을 지니고 있습니다.
+프로토타입 기반 프로그래밍은 클래스가 필요 없는 객체지향 프로그래밍 스타일로 프로토타입 체인과 클로저 등으로 객체 지향 언어의 상속, 캡슐화 등의 개념을 구현 할 수 있습니다.
+
+``` js
+// ES5
+var Renee = (function () {
+	// Constructor
+	function Renee(name) {
+		this._name = name;
+	}
+
+	// Public method
+	Renee.prototype.sayHi = function() {
+		console.log('Hi ' + this._name);
+	};
+	
+	// return constructor
+	return Renee;
+}());
+
+var me = new Renee('eunhye');
+me.sayHi();
+```
+
+### 인스턴스
+object라는 이름의 객체의 새로운 인스턴스를 만들 때에는 new object로 사용하고, 차후에 접근할 수 있도록 변수에 결과를 받습니다.<br>
+아래의 예제에서 Renee라는 이름의 클래스를 정의한 후에, 두개의 인스턴스를 생성하고 있습니다.
+
+``` js
+function Renee() {}
+
+const eunhye() = new Renee();
+const park() = new Renee();
+```
+### Constructor
+
+#### 클래스 필드(class field)
+클래스 내부의 캡슐화된 변수를 말한다. 데이터 멤버 또는 멤버 변수라고도 부른다. 클래스 필드는 인스턴스의 프로퍼티 또는 정적 프로퍼티가 될 수 있다.
+쉽게 말해, 자바스크립트의 생성자 함수에서 this에 추가한 프로퍼티를 클래스 기반 객체지향 언어에서는 클래스 필드라고 부른다.
+
+``` js
+class Foo {
+	name = ''; // SyntaxError
+	constructor() {}
+}
+```
+
+constructor는 인스턴스를 생성하고 클래스 필드를 초기화하기 위한 특수한 메소드입니다.
+
+``` js
+// 클래스 선언문
+class Renee {
+	// constructor(생성자). 이름을 바꿀 수 없다.
+	constructor(name) {
+		// this는 클래스가 생성할 인스턴스를 가리킨다.
+		// _name은 클래스 필드이다.
+		this._name = name;
+	}
+}
+
+// 인스턴스 생성
+const me = new Renee ('park eunhye');
+console.log(me); // Renee {_name: "park eunhye"}
+```
+
+Constructor는 클래스 내에 한 개만 존재 할 수 있으며 만약 2개 이상의 Constructor를 포함하면 문법 에러(SyntaxError)가 발생합니다.
+인스턴스를 생성 할 때 new 연산자와 함께 호출한 것이 바로 Constructor이며 Constructor의 파라미터에 전달한 값은 클래스 필드에 할당합니다.
+Constructor는 생략 가능하며 생략 시 클래스에 Constructor() {}를 포함한 것과 동일하게 동작합니다.
+즉, 빈 객체를 생성합니다. 따라서 인스턴스에 프로퍼티를 추가하려면 인스턴스를 생성한 이후, 프로퍼티를 동적으로 추가해야 합니다.
+Constructor는 인스턴스의 생성과 동시에 클래스 필드의 생성과 초기화를 실행합니다.
+따라서 클래스 필드를 초기화해야 한다면 Constructor를 생략해서는 안됩니다.
+
+### 클래스 상속 
+클래스 상속(Class Inheritance)은 코드 재사용 관점에서 매우 유용합니다.<br>
+새롭게 정의할 클래스가 기존에 있는 클래스와 매우 유사하다면, 상속을 통해 그대로 사용하되 다른 점만 구현하면 됩니다.<br>
+코드 재사용은 개발 비용을 현저히 줄일 수 있는 잠재력이 있으므로 매우 중요하다.
+- extends 키워드
+- super 키워드
+- static 메소드와 prototype 메소드의 상속
+
+#### extends 키워드
+``` javascript
+class User {
+	constructor(name, lastName, email, password) {
+		this.username = name;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+	}
+	sayHello() {
+		console.log(`Hello, my name is ${this.username}`);
+	}
+	getProfile() {
+		console.log(`${this.username} ${this.lastName} ${this.email} ${this.password}`);
+	}
+	updatePassword(newPassword, currentPassword){
+		if(currentPassword == this.password) {
+			this.password = newPassword
+		} else {
+			console.log("Can't change password");
+		}
+	}
+}
+const miniUser = new User("eunhye", "park", "eunhye@mail.com", "1234"); 
+
+// console.log(miniUser.password);
+// miniUser.updatePassword("hello", "1234");
+// console.log(miniUser.password);
+
+// user 클래스에서 extends 해서 불러옴
+// admin 클래스는 deletewebsite라는 function을 가지고 있다고 해보자
+class Admin extends User {
+	deleteWebsite() {
+		console.log("Deleteing the whole website...");
+	}
+}
+
+const miniAdmin = new Admin("eunhye", "park", "eunhye@mail.com", "1234");
+
+miniAdmin.deleteWebsite();
+
+console.log(miniAdmin.email);
+```
+
+#### super 키워드
+``` javascript
+class User {
+	constructor({username, lastName, email, password}) {
+		this.username = username;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+	}
+	getProfile() {
+		console.log(`${this.username} ${this.lastName} ${this.email} ${this.password}`);
+	}
+	updatePassword(newPassword, currentPassword){
+		if(currentPassword == this.password) {
+			this.password = newPassword
+		} else {
+			console.log("Can't change password");
+		}
+	}
+}
+// 만약 여러 arguments를 가지고 있다면 object로 하는게 좋다, 왜냐하면 어떤 값을 넘겨주는지를 볼 수 있기 때문이다
+const miniUser = new User({
+	username:"eunhye", 
+	lastName:"park", 
+	email:"eunhye@mail.com", 
+	password:"1234"
+}); 
+
+// super는 호출하게 된다 counstructor의 바로 원시 클래스, user를 가리킨다.
+class Admin extends User {
+	constructor({username, lastName, email, password, superAdmin, isActive}) {
+		super({username, lastName, email, password});
+		this.superAdmin = superAdmin;
+		this.isActive = isActive;
+	}
+	deleteWebsite() {
+		console.log("Deleteing the whole website...");
+	}
+}
+const admin = new Admin({
+	username:"eunhye", 
+	lastName:"park", 
+	email:"eunhye@mail.com", 
+	password:"1234",
+	superAdmin: true,
+	isActive: true
+});
+
+// admin 인스턴스만 minuUser를 호출할 수 있다
+// minuUser는 user의 인스턴스다
+// admin 인스턴스는 admin인스턴스와 user인스턴스를 합친 것
+
+```
+
+---
+
+## Promises
+멀티 태스킹은 한 가지 이상의 것을 한 번에 동시에 생각하는게 아닙니다. 단지 어떤 사이를 빠르게 스위칭 하는 것을 의미합니다.
+컴퓨터는 두 가지 일을 동시에 할 수 있습니다. 예를 들면 컴퓨터는 화면을 녹화하면서 오디오를 녹음 할 수 있고 wi-fi를 연결 할 수 있고, 시간이 바뀌는 것을 기다릴 수 있습니다.  
+
+자바스크립트가 이와 같습니다.  
+
+동시에 많은 일들을 할 수 있습니다. 그리고 이런 것의 실행을 막지 않습니다.
+
+``` javascript
+const hello = fetch("http://google.com");
+
+console.log("something");
+console.log(hello); 
+// => something
+// => fetch Error
+```
+
+이론적으로 fetch Error는 Something 전에 나와야 합니다. google.com을 fetch한 뒤 Error를 얻은 후 표시하고 something을 console에 노출하고
+하지만 자바스크립트는 그렇지 않습니다. 프로그램 실행을 멈추지 않으며 순차적으로 처리하는 것이 아니라 한꺼번에 실행됩니다. 
+이것이 바로 비동기성(Async)입니다.  
+
+[MDN Promise](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise)  
+
+Promise는 비동기 작업이 맞이할 미래의 완료 또는 실패와 그 결과 값을 나타냅니다.
+Promise를 만들 때는 실행 할 수 있는 function을 넣어야합니다.
+
+```js
+const promisel = new Promise((resolve, reject) => {
+  setTimeout(resolve, 3000, "Yes you are");
+});
+
+console.log(promisel);
+
+setInterval(console.log, 1000, promisel);
+// Promise {<pending>}
+// Promise {<pending>}
+// Promise {<pending>}
+// Promise {<fulfilled>: "Yes you are"}
+// Promise {<fulfilled>: "Yes you are"}
+// Promise {<fulfilled>: "Yes you are"}
+// Promise {<fulfilled>: "Yes you are"}
+// ...
+```
+
+promise를 이용하여 무언가를 불러올 때는 then을 사용해봅니다.  
+
+[MDN Promise.prototype.then()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)  
+
+```javascript
+const promisel = new Promise((resolve, reject) => {
+	setTimeout(resolve, 3000, "Yes you are")
+});
+
+promisel.then(value => console.log(value));
+```
+then은 넣고 싶은 만큼 넣어서 chaning 해주면 됩니다.
+
+``` javascript
+const promisel = new Promise((resolve, reject) => {
+	resolve(2)
+});
+
+promisel
+	.then(number => {
+		console.log(number * 2);
+		return number * 2
+	})
+	.then(otherNumber => {
+		console.log(otherNumber * 2);
+	});
+```
+
+```javascript
+const promisel = new Promise((resolve, reject) => {
+	resolve(2)
+});
+
+const timesTwo = ( number ) => number * 2;
+
+promisel
+	.then(timesTwo)
+	.then(timesTwo)
+	.then(timesTwo)
+	.then(timesTwo)
+	.then(timesTwo)
+	.then(() => {
+		throw Error("Something");
+	})
+	.then(lastNumber => console.log(lastNumber))
+	.catch(error => console.log(error));
+```
+
+promise에 에러가 생기면 catch를 이용하여 error를 호출 할 수 있습니다.
+
+[MDN Promise.prototype.catch()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch)  
+
+```javascript
+const promisel = new Promise((resolve, reject) => {
+	setTimeout(reject, 3000, "You are ugly")
+});
+
+promisel
+	.then(value => console.log(value))
+	.catch(value => console.log(value));
+```
+
+### Promise.all
+
+### Promise.race
+
+### .finally
+
+
+--- 
+
+## Async, Await
+
+### try catch finally
+
+### Parallel Async Await
+
+
+
+
 
 
 
 ---
+##### 참고사이트  
+[Nomad ECMAScript2015](https://nomadcoders.co/es6-once-and-for-all)  
 
-##### 참고사이트
 **ECMAScript2015 기본지식**  
 [MDN ECMAScript2015](https://developer.mozilla.org/ko/docs/Web/JavaScript/New_in_JavaScript/ECMAScript_6_support_in_Mozilla)  
 [Poiemaweb ECMAScript2015](https://poiemaweb.com/es6-block-scope)  
 [우아한형제들 기술블로그](https://woowabros.github.io/experience/2017/12/01/es6-experience.html)  
+
+**variables**  
+[MDN Let](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/let)  
+[MDN Const](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/const)  
+[MDN block](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/block)  
+
+**Functions**  
+[MDN Arrow Function](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Functions/%EC%95%A0%EB%A1%9C%EC%9A%B0_%ED%8E%91%EC%85%98)  
 
 **String**  
 [MDN DocumentFragment](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment)  
@@ -559,9 +1015,14 @@ check(); // 4
 [MDN Array.findIndex()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex)  
 [MDN Array.fill()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/fill)  
 
+**Destructuring**  
+[MDN 객체 구조 분해](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#%EA%B0%9D%EC%B2%B4_%EA%B5%AC%EC%A1%B0_%EB%B6%84%ED%95%B4)  
+[MDN 배열 구조 분해](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#%EB%B0%B0%EC%97%B4_%EA%B5%AC%EC%A1%B0_%EB%B6%84%ED%95%B4)  
 
+**Classes**  
+[MDN Classes](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Classes)  
+[MDN super](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/super)  
 
-
----
-  
-[Nomad ECMAScript2015](https://nomadcoders.co/es6-once-and-for-all)  
+**Promises**  
+[MDN Promise](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise)  
+[MDN Promise.prototype.then()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)  
