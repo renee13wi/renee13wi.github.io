@@ -330,6 +330,11 @@ a:focus {
 
 .gatsby-highlight {
   margin-bottom: var(--spacing-8);
+  font-size: 13px;
+}
+.gatsby-highlight code[class*="language-"], 
+.gatsby-highlight pre[class*="language-"] {
+  line-height: 1.65;
 }
 
 /* Media queries */
