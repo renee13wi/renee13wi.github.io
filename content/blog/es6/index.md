@@ -1,6 +1,6 @@
 ---
 title: ECMAScript 2015
-date: "2021-01-18T23:00:03.284Z"
+date: "2021-01-25T23:00:03.284Z"
 description: ECMAScript 2015는 ECMAScript 언어의 6번째 표준 스펙(Spec)입니다.  
 --- 
 
@@ -117,8 +117,8 @@ Arrow Function은 자바스크립트에서 함수의 모습을 개선한 것으�
 #### 화살표 함수 선언 방법
 ```jsx
 // 매개변수 지정 방법
-    () => { ... } // 매개변수가 없을 경우
-     x => { ... } // 매개변수가 한 개인 경우, 소괄호를 생략할 수 있습니다.
+	() => { ... } // 매개변수가 없을 경우
+	 x => { ... } // 매개변수가 한 개인 경우, 소괄호를 생략할 수 있습니다.
 (x, y) => { ... } // 매개변수가 여러 개인 경우, 소괄호를 생략할 수 없습니다.
 
 // 함수 몸체 지정 방법
@@ -195,7 +195,7 @@ const renee = {
   name: "eunhye",
   age: 24, 
   addYear: () => {
-    this.age++
+	this.age++
   }
 }
 
@@ -241,8 +241,8 @@ const test = {
   name : "renee",
   age : "29",
   addAge : () => {
-    this.age ++;
-    console.log(`2020년에는 ${this.age}살이다...`)
+	this.age ++;
+	console.log(`2020년에는 ${this.age}살이다...`)
   }
 };
 
@@ -254,8 +254,8 @@ const test = {
   name : "renee",
   age : "29",
   addAge() {
-    this.age ++;
-    console.log(`2020년에는 ${this.age}살이다...`)
+	this.age ++;
+	console.log(`2020년에는 ${this.age}살이다...`)
   }
 }
 console.log(test); // {name: "renee", age: "29", addAge: ƒ}
@@ -482,14 +482,15 @@ const buttons = document.getElementsByClassName("btn");
 const buttons = document.querySelectorAll("button");
 console.log(buttons); // NodeList(10)
 
-buttons.forEach(button => { // buttons 는 forEach란 메소드를 가지고 있지 않다.
+buttons.forEach(button => {
+	// buttons 는 forEach란 메소드를 가지고 있지 않다.
   button.addEventListner("click", function(){
-    console.log("I ve been clicked")
+		console.log("I ve been clicked")
   });
 });
 Array.from(buttons).forEach(button => {
   button.addEventListner("click", function(){
-    console.log("I ve been clicked")
+		console.log("I ve been clicked")
   });
 });
 ```
@@ -968,24 +969,152 @@ promisel
 
 ### Promise.all
 
+```promise.all```은 주어진 모든 promise를 실행한 후 진행되는 하나의 promise를 반환합니다.
+```promise.all```은 한개의 promise를 리턴값으로 주는데 모든 promise가 전부 resolve 되고 나면 마지막 promise를 리턴값으로 주는 것을 의미한다.  
+
+즉 Promise.all이 다른 promise들이 전부 진행 될 때까지 기다렸다가 진행된다는 것을 말합니다.
+
+[MDN Promise.prototype.all()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)  
+
+``` javascript
+const p1 = new Promise((resolve) => {
+	setTimeout(resolve, 5000, "First");
+});
+
+const p2 = new Promise((resolve) => {
+	setTimeout(resolve, 1000, "Second");
+});
+
+const p3 = new Promise((resolve) => {
+	setTimeout(resolve, 3000, "Third");
+});
+
+const motherPromise = Promise.all([p1, p2, p3]);
+
+motherPromise.then(values => console.log(values));
+// ["First", "Second", "Third"]
+```
+
 ### Promise.race
+```promise.all```과 사용법은 같습니다. 어느 것이 먼저 되도 상관없을 때 race 사용하면 됩니다.  
+
+[MDN Promise.race()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise/race)  
+
+``` javascript
+
+const p1 = new Promise((resolve) => {
+	setTimeout(resolve, 10000, "First");
+});
+
+const p2 = new Promise((resolve, reject) => {
+	setTimeout(reject, 5000, "Second");
+});
+
+const p3 = new Promise((resolve) => {
+	setTimeout(resolve, 3000, "Third");
+});
+
+const motherPromise = Promise.race([p1, p2, p3]);
+
+motherPromise
+	.then(values => console.log(values));
+	.catch(err => console.log(err));
+```
 
 ### .finally
+내가 promise가 성공하거나 실패했을 때 무언가 하고 싶을겁니다.  
+그게 뭐든간에 코멘트를 API를 통해 저장하고 싶다면, user가 save 버튼을 눌렀을 때, spinner를 보여주고 싶고
+만약 에러가 발생한다면 spinner를 멈추고 유저에게 에러를 해결하라고 보여주고 싶고, 업로드에 성공하면, spinner를 멈추고 싶다면 이게 바로 finally라고 한다.  
 
+[MDN Promise.prototype.finally()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise/finally)  
+
+``` javascript
+const p1 = new Promise((resolve, reject) => {
+	setTimeout(reject, 10000, "First");
+})
+	.then(value => console.log(value))
+	.catch(err => console.log(err))
+	.finally(() => console.log("I'm done"));
+```
 
 --- 
 
 ## Async, Await
 
+async/await를 만든 이유는, 보기 좋은 코드를 만들기위해서 입니다.
+Promise then, catch같은 것은 이전 버전입니다. 많은 사람들이 결국 많은 then을 사용해야 하는 문제가 있습니다.
+async/await은 기본적으로 promise를 사용하는 코드를 더 좋게 보이게 하는 문법입니다.
+
+- await은 혼자서는 사용할 수 없다.  
+- await은 항상 async function 안에서만 사용 할 수 있다.  
+- await는 기본적으로 promise가 끝나길 기다린다
+
+[MDN await](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/await)  
+[MDN async function](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/async_function)  
+
+``` javascript
+const getMoviesPromise = () => {
+	fetch("https://yts.am/api/v2/list_movies.json")
+		.then(response => {
+			console.log(response);
+			return response.json();
+		})
+		.then(json => console.log(json))
+		.catch(e => console.log(`x ${e}`));
+}
+
+const getMoviesAsync = async() => {
+	const response = await fetch("https://yts.am/api/v2/list_movies.json");
+	const json = await response.json();
+	console.log(json);
+}
+
+// async getMoviesAsync function() {}
+getMoviesAsync();
+```
+
 ### try catch finally
+
+[MDN try...catch](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/try...catch)  
+
+``` javascript
+const getMoviesAsync = async () => {
+	try {
+		const response = await fetch("https://yts.am/api/v2/list_movies.json");
+		const json = await response.json();
+		console.log(json);
+	} catch (e) {
+		console.log(`x ${e}`);
+	} finally {
+		console.log("We are done!");
+	}
+}
+getMoviesAsync();
+```
 
 ### Parallel Async Await
 
+``` javascript
+const getMoviesAsync = async () => {
+	try {
+		const [moviesResponse, suggestionsResponse] = await Promise.all([
+			fetch("https://yts.am/api/v2/list_movies.json"), 
+			fetch("https://yts.am/api/v2/movie_suggestions.json?movie_id=100")
+		]); // value는 두 promise의 결과값 value다
 
-
-
-
-
+		const [movies, suggestions] = await Promise.all([
+			moviesResponse.json(),
+			suggestionsResponse.json()
+		]);
+		console.log(movies, upcoming);
+	} catch (e) {
+		console.log(`x ${e}`);
+	} finally {
+		console.log("We are done!");
+	}
+}
+getMoviesAsync();
+```
 
 ---
 ##### 참고사이트  
@@ -1026,3 +1155,11 @@ promisel
 **Promises**  
 [MDN Promise](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise)  
 [MDN Promise.prototype.then()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)  
+[MDN Promise.prototype.all()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)   
+[MDN Promise.race()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise/race)  
+[MDN Fetch_API](https://developer.mozilla.org/ko/docs/Web/API/Fetch_API/Fetch%EC%9D%98_%EC%82%AC%EC%9A%A9%EB%B2%95)  
+
+**Async, Await**  
+[MDN await](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/await)  
+[MDN async function](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/async_function)  
+[MDN try...catch](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/try...catch)  
