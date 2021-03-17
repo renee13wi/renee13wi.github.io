@@ -1,13 +1,15 @@
 module.exports = {
   pathPrefix: "/renee_blog",
   siteMetadata: {
-    title: `Renee UI Log`,
+    title: `Renee UI Blog`,
     author: {
       name: `renee`,
-      summary: `daily studying UI`,
+      summary: `A starter blog demonstrating what Renee UI developer can do.`,
+      gitUrl: `https://github.com/renee13wi`,
+      email: `renee13wi@gmail.com`
     },
-    description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsby-starter-blog-demo.netlify.app/`,
+    description: `A starter blog demonstrating what Renee UI developer can do.`,
+    siteUrl: `https://renee13wi.github.io/`,
   },
   plugins: [
     {
