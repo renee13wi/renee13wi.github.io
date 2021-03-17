@@ -1,7 +1,7 @@
 module.exports = {
   pathPrefix: "/renee_blog",
   siteMetadata: {
-    title: `Renee Tech Blog`,
+    title: `Renee UI Log`,
     author: {
       name: `renee`,
       summary: `daily studying UI`,
@@ -10,6 +10,12 @@ module.exports = {
     siteUrl: `https://gatsby-starter-blog-demo.netlify.app/`,
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-disqus`,
+      options: {
+        shortname: `https-renee13wi-github-io`
+      }
+  },
     {
       resolve: `gatsby-source-filesystem`,
       options: {

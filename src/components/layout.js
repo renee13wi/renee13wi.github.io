@@ -6,8 +6,6 @@ const Layout = ({ location, title, children }) => {
   const isRootPath = location.pathname === rootPath
   let header
 
-  console.log(children);
-
   if (isRootPath) {
     header = (
       <h1 className="main-heading">
